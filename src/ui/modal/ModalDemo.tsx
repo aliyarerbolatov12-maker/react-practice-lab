@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Modal from "./Modal";
-
+import SimpleModal from "./SimpleModal";
 export default function ModalDemo() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -9,13 +8,14 @@ export default function ModalDemo() {
       <h2>Modal Demo</h2>
       <p>Пример работы модального окна с анимацией.</p>
       <button onClick={() => setIsOpen(true)}>Open Modal</button>
-
-      <Modal
-        title="Привет!"
-        content={<p>Это контент модального окна</p>}
-        onClose={() => setIsOpen(false)}
-        isOpen={isOpen}
-      />
+      <SimpleModal
+        opened={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+      >
+        <h2>Simple animation</h2>
+      </SimpleModal>
     </div>
   );
 }
