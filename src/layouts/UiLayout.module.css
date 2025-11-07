@@ -1,67 +1,110 @@
 .layout {
-  display: flex;
-  min-height: 100vh;
-  background-color: #f7f8fa;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    min-height: 100vh;
+    background-color: #f7f8fa;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+}
+
+.menuButton {
+    display: block; 
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 500;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #1e1e1e;
+    cursor: pointer;
+    padding: 0.25rem 0.45rem;
+    border-radius: 6px;
+    transition: color 0.2s ease;
+}
+
+.menuButton.open {
+    color: #ffffff;
 }
 
 .sidebar {
-  width: 240px;
-  background-color: #1e1e1e;
-  color: #fff;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 280px;
+    max-width: 85%;
+    background: #1e1e1e;
+    color: #fff;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transform: translateX(110%);
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    opacity: 0;
+    z-index: 150;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+    opacity: 1;
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  padding-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 0.5rem;
 }
 
 .nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .link {
-  color: #ccc;
-  text-decoration: none;
-  font-size: 0.95rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  transition: all 0.2s ease-in-out;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
 .active {
-  background-color: #61dafb;
-  color: #000;
-  font-weight: 600;
+    background-color: #61dafb;
+    color: #000;
+    font-weight: 600;
 }
 
 .main {
-  flex: 1;
-  padding: 2rem 3rem;
-  animation: fadeIn 0.3s ease-out;
+    flex: 1;
+    padding: 2rem 3rem;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@media (max-width: 480px) {
+    .sidebar {
+        width: 70%;
+        max-width: 300px;
+    }
+
+    .main {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 260px;
+    }
+
+    .main {
+        padding: 1rem;
+    }
 }
