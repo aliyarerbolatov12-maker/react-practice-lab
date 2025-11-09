@@ -14,7 +14,7 @@ export function Tabs({ tabs }: TabsProps) {
   const [active, setActive] = useState(0);
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <div className={styles.tabHeader}>
         {tabs.map((tab, i) => (
           <button
