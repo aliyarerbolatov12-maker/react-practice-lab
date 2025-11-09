@@ -7,6 +7,14 @@ export default function UiLayout() {
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
+  const links = [
+    { to: "/modal", label: "Modal" },
+    { to: "/tabs", label: "Tabs" },
+  ];
+
+  const getLinkClass = ({ isActive }: { isActive: boolean }) =>
+    isActive ? `${styles.link} ${styles.active}` : styles.link;
+
   return (
     <div className={styles.layout}>
       <button
@@ -15,27 +23,18 @@ export default function UiLayout() {
       >
         ☰
       </button>
+
       <aside className={`${styles.sidebar} ${sidebarOpen ? styles.open : ""}`}>
         <h3 className={styles.title}>UI Components</h3>
         <nav className={styles.nav}>
-          <NavLink
-            to="/modal"
-            className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.active}` : styles.link
-            }
-          >
-            Modal
-          </NavLink>
-          <NavLink
-            to="/tabs"
-            className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.active}` : styles.link
-            }
-          >
-            Tabs
-          </NavLink>
+          {links.map(({ to, label }) => (
+            <NavLink key={to} to={to} className={getLinkClass}>
+              {label}
+            </NavLink>
+          ))}
         </nav>
       </aside>
+
       <main className={styles.main}>
         <Outlet />
       </main>
