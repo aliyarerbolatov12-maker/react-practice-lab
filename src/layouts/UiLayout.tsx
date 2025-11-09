@@ -26,6 +26,14 @@ export default function UiLayout() {
           >
             Modal
           </NavLink>
+          <NavLink
+            to="/tabs"
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+          >
+            Tabs
+          </NavLink>
         </nav>
       </aside>
       <main className={styles.main}>
