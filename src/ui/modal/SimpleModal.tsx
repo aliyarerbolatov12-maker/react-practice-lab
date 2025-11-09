@@ -30,9 +30,7 @@ export default function SimpleModal({
   return createPortal(
     <div
       ref={ref}
-      className={`${styles.container} ${
-        animate ? styles.opened : styles.closed
-      }`}
+      className={`${styles.container} ${animate ? styles.opened : ""}`}
     >
       <div className={styles.overlay} onClick={onClose}></div>
       <div className={styles.content}>{children}</div>

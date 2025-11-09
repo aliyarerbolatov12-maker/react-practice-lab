@@ -14,7 +14,7 @@
   background: rgba(0, 0, 0, 0.4);
   opacity: 0;
   transition: opacity 0.3s ease;
-  pointer-events: auto; 
+  pointer-events: auto;
 }
 
 .content {
@@ -35,12 +35,5 @@
 
 .opened .content {
   opacity: 1;
-}
-
-.closed .overlay {
-  opacity: 0;
-}
-
-.closed .content {
-  opacity: 0;
+  transform: translateY(0);
 }

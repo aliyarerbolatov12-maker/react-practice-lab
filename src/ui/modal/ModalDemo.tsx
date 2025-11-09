@@ -4,7 +4,7 @@ export default function ModalDemo() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div>
       <h2>Modal Demo</h2>
       <p>Пример работы модального окна с анимацией.</p>
       <button onClick={() => setIsOpen(true)}>Open Modal</button>
