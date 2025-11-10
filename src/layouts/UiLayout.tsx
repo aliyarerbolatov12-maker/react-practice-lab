@@ -10,6 +10,7 @@ export default function UiLayout() {
   const links = [
     { to: "/modal", label: "Modal" },
     { to: "/tabs", label: "Tabs" },
+    { to: "/dropdown", label: "dropdown" },
   ];
 
   const getLinkClass = ({ isActive }: { isActive: boolean }) =>
