@@ -4,6 +4,7 @@ import ModalDemo from "./ui/modal/ModalDemo";
 import "./App.css";
 import TabsDemo from "./ui/tabs/TabsDemo";
 import DropdownDemo from "./ui/dropdown/DropdownDemo";
+import AccordionDemo from "./ui/accordion/AccordionDemo";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <Route path="modal" element={<ModalDemo />} />
           <Route path="tabs" element={<TabsDemo />} />
           <Route path="dropdown" element={<DropdownDemo />} />
+          <Route path="accordion" element={<AccordionDemo />} />
         </Route>
       </Routes>
     </BrowserRouter>
