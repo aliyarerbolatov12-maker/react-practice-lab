@@ -29,8 +29,8 @@
 
 .options {
   position: absolute;
-  top: 0;
-  left: 100%;
+  top: 100%;
+  left: 0%;
   display: none;
   opacity: 0;
   background-color: #fff;

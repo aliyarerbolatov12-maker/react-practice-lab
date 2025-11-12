@@ -9,9 +9,14 @@ type Option = {
 interface DropDownProps {
   optionsHeader: string;
   options: Option[];
+  onSelect?: (label: string) => void;
 }
 
-export default function DropDown({ optionsHeader, options }: DropDownProps) {
+export default function DropDown({
+  optionsHeader,
+  options,
+  onSelect,
+}: DropDownProps) {
   const [optionsActive, setOptionsActive] = useState(false);
   const [header, setHeader] = useState(optionsHeader);
   const [activeIndexOption, setActiveIndexOption] = useState(-1);
@@ -40,6 +45,7 @@ export default function DropDown({ optionsHeader, options }: DropDownProps) {
               setHeader(option.label);
               setOptionsActive(false);
               setActiveIndexOption(i);
+              if (onSelect) onSelect(option.label);
             }}
             className={`${activeIndexOption === i ? styles.active : ""}`}
           >
