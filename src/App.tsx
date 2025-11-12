@@ -5,6 +5,7 @@ import "./App.css";
 import TabsDemo from "./ui/tabs/TabsDemo";
 import DropdownDemo from "./ui/dropdown/DropdownDemo";
 import AccordionDemo from "./ui/accordion/AccordionDemo";
+import ButtonDemo from "./ui/buttons/ButtonDemo";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="tabs" element={<TabsDemo />} />
           <Route path="dropdown" element={<DropdownDemo />} />
           <Route path="accordion" element={<AccordionDemo />} />
+          <Route path="buttons" element={<ButtonDemo />} />
         </Route>
       </Routes>
     </BrowserRouter>
