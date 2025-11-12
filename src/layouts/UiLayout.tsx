@@ -4,55 +4,55 @@ import styles from "./UiLayout.module.css";
 import useClickOutside from "../hooks/useClickOutside";
 
 export default function UiLayout() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
-  const ignoreNextMouseDownRef = useRef(false);
+  const refs = [sidebarRef, toggleButtonRef];
 
-  const links = [
+  const toggleSidebar = useCallback(() => {
+    setIsSidebarOpen((prev) => !prev);
+  }, []);
+
+  const closeSidebar = useCallback(() => {
+    setIsSidebarOpen(false);
+  }, []);
+
+  useClickOutside(refs, closeSidebar);
+
+  const navLinks = [
     { to: "/modal", label: "Modal" },
     { to: "/tabs", label: "Tabs" },
     { to: "/dropdown", label: "Dropdown" },
     { to: "/accordion", label: "Accordion" },
   ];
 
-  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
-
-  useClickOutside(
-    sidebarRef,
-    useCallback(() => {
-      if (ignoreNextMouseDownRef.current) {
-        ignoreNextMouseDownRef.current = false;
-        return;
-      }
-      setSidebarOpen(false);
-    }, [])
+  const getLinkClass = useCallback(
+    ({ isActive }: { isActive: boolean }) =>
+      `${styles.link} ${isActive ? styles.active : ""}`,
+    []
   );
-
-  const getLinkClass = ({ isActive }: { isActive: boolean }) =>
-    isActive ? `${styles.link} ${styles.active}` : styles.link;
 
   return (
     <div className={styles.layout}>
       <button
-        ref={buttonRef}
-        className={`${styles.menuButton} ${sidebarOpen ? styles.open : ""}`}
-        onMouseDown={() => {
-          ignoreNextMouseDownRef.current = true;
-        }}
+        ref={toggleButtonRef}
+        className={`${styles.menuButton} ${isSidebarOpen ? styles.open : ""}`}
         onClick={toggleSidebar}
+        aria-label="Toggle sidebar"
+        aria-expanded={isSidebarOpen}
       >
         ☰
       </button>
 
       <aside
         ref={sidebarRef}
-        className={`${styles.sidebar} ${sidebarOpen ? styles.open : ""}`}
+        className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}
       >
         <h3 className={styles.title}>UI Components</h3>
         <nav className={styles.nav}>
-          {links.map(({ to, label }) => (
+          {navLinks.map(({ to, label }) => (
             <NavLink key={to} to={to} className={getLinkClass}>
               {label}
             </NavLink>

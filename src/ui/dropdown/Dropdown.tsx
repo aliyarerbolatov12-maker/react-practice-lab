@@ -19,7 +19,7 @@ export default function DropDown({ optionsHeader, options }: DropDownProps) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(
-    ref,
+    [ref],
     useCallback(() => setOptionsActive(false), [])
   );
 
