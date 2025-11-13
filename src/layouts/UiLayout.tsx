@@ -27,6 +27,7 @@ export default function UiLayout() {
     { to: "/dropdown", label: "Dropdown" },
     { to: "/accordion", label: "Accordion" },
     { to: "/buttons", label: "Buttons" },
+    { to: "/toggle", label: "Toggle" },
   ];
 
   const getLinkClass = useCallback(

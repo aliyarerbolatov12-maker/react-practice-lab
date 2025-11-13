@@ -6,6 +6,7 @@ import TabsDemo from "./ui/tabs/TabsDemo";
 import DropdownDemo from "./ui/dropdown/DropdownDemo";
 import AccordionDemo from "./ui/accordion/AccordionDemo";
 import ButtonDemo from "./ui/buttons/ButtonDemo";
+import ToggleDemo from "./ui/toggle/ToggleDemo";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="dropdown" element={<DropdownDemo />} />
           <Route path="accordion" element={<AccordionDemo />} />
           <Route path="buttons" element={<ButtonDemo />} />
+          <Route path="toggle" element={<ToggleDemo />} />
         </Route>
       </Routes>
     </BrowserRouter>
