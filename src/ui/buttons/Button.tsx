@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 import styles from "./button.module.css";
 
 interface ButtonProps {
@@ -18,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${styles.button} ${styles[variant]}`}
+      className={clsx(styles.button, styles[variant])}
       onClick={!isDisabled ? onClick : undefined}
       disabled={isDisabled}
     >

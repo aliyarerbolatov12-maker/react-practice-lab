@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useMount } from "../../hooks/useMount";
+import clsx from "clsx";
 import styles from "./simple.module.css";
 
 interface SimpleModalProps {
@@ -30,7 +31,7 @@ export default function SimpleModal({
   return createPortal(
     <div
       ref={ref}
-      className={`${styles.container} ${animate ? styles.opened : ""}`}
+      className={clsx(styles.container, { [styles.opened]: animate })}
     >
       <div className={styles.overlay} onClick={onClose}></div>
       <div className={styles.content}>{children}</div>

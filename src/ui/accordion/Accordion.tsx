@@ -1,4 +1,5 @@
 import { useState } from "react";
+import clsx from "clsx";
 import styles from "./accordion.module.css";
 
 interface AccordionProps {
@@ -18,7 +19,7 @@ const Accordion = ({ title, answer }: AccordionProps) => {
         </button>
       </div>
 
-      <div className={`${styles.contentWrapper} ${open ? styles.open : ""}`}>
+      <div className={clsx(styles.contentWrapper, { [styles.open]: open })}>
         <div className={styles.content}>{answer}</div>
       </div>
     </div>

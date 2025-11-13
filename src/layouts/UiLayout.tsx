@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import { Outlet, NavLink } from "react-router-dom";
+import clsx from "clsx";
 import styles from "./UiLayout.module.css";
 import useClickOutside from "../hooks/useClickOutside";
 
@@ -32,7 +33,7 @@ export default function UiLayout() {
 
   const getLinkClass = useCallback(
     ({ isActive }: { isActive: boolean }) =>
-      `${styles.link} ${isActive ? styles.active : ""}`,
+      clsx(styles.link, { [styles.active]: isActive }),
     []
   );
 
@@ -40,7 +41,7 @@ export default function UiLayout() {
     <div className={styles.layout}>
       <button
         ref={toggleButtonRef}
-        className={`${styles.menuButton} ${isSidebarOpen ? styles.open : ""}`}
+        className={clsx(styles.menuButton, { [styles.open]: isSidebarOpen })}
         onClick={toggleSidebar}
         aria-label="Toggle sidebar"
         aria-expanded={isSidebarOpen}
@@ -50,7 +51,7 @@ export default function UiLayout() {
 
       <aside
         ref={sidebarRef}
-        className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}
+        className={clsx(styles.sidebar, { [styles.open]: isSidebarOpen })}
       >
         <h3 className={styles.title}>UI Components</h3>
         <nav className={styles.nav}>

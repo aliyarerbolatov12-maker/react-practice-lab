@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback } from "react";
+import clsx from "clsx";
 import styles from "./dropdown.module.css";
 import useClickOutside from "../../hooks/useClickOutside";
 
@@ -37,7 +38,7 @@ export default function DropDown({
       >
         {header}
       </div>
-      <ul className={`${styles.options} ${optionsActive ? styles.open : ""}`}>
+      <ul className={clsx(styles.options, { [styles.open]: optionsActive })}>
         {options.map((option, i) => (
           <li
             key={i}
@@ -45,9 +46,9 @@ export default function DropDown({
               setHeader(option.label);
               setOptionsActive(false);
               setActiveIndexOption(i);
-              if (onSelect) onSelect(option.label);
+              onSelect?.(option.label);
             }}
-            className={`${activeIndexOption === i ? styles.active : ""}`}
+            className={clsx({ [styles.active]: activeIndexOption === i })}
           >
             {option.label}
           </li>

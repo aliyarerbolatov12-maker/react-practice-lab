@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import clsx from "clsx";
 import styles from "./tabs.module.css";
 
 type Tab = {
@@ -20,9 +21,9 @@ export function Tabs({ tabs }: TabsProps) {
           <button
             key={i}
             onClick={() => setActive(i)}
-            className={`${styles.tabButton} ${
-              active === i ? styles.active : ""
-            }`}
+            className={clsx(styles.tabButton, {
+              [styles.active]: active === i,
+            })}
           >
             {tab.label}
           </button>

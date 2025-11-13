@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import "./toggle.css";
 
 type ToggleType = "checkbox" | "radio";
@@ -22,7 +23,11 @@ export default function Toggle({
 
   return (
     <div className="toggle" onClick={handleClick}>
-      <div className={`${type} ${checked ? `${type}Checked` : ""}`}></div>
+      <div
+        className={clsx(type, {
+          [`${type}Checked`]: checked,
+        })}
+      ></div>
       {label && <span className="label">{label}</span>}
     </div>
   );
