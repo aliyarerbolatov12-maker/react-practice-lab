@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import clsx from "clsx";
 import styles from "./dropdown.module.css";
 import useClickOutside from "../../hooks/useClickOutside";
@@ -24,17 +24,50 @@ export default function DropDown({
 
   const ref = useRef<HTMLDivElement | null>(null);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    if (!optionsActive) return;
+
+    if (e.key === "ArrowDown") {
+      setActiveIndexOption((prev) => (prev + 1) % options.length);
+    } else if (e.key === "ArrowUp") {
+      setActiveIndexOption((prev) =>
+        prev <= 0 ? options.length - 1 : prev - 1
+      );
+    } else if (e.key === "Enter") {
+      if (activeIndexOption >= 0 && activeIndexOption < options.length) {
+        const option = options[activeIndexOption];
+        setHeader(option.label);
+        setOptionsActive(false);
+        onSelect?.(option.label);
+      }
+    } else if (e.key === "Escape") {
+      setOptionsActive(false);
+    }
+  };
+
+  useEffect(() => {
+    if (optionsActive) {
+      setActiveIndexOption((prev) => (prev >= 0 ? prev : 0));
+    }
+  }, [optionsActive]);
+
   useClickOutside(
     [ref],
     useCallback(() => setOptionsActive(false), [])
   );
 
   return (
-    <div className={styles.wrapper} ref={ref}>
+    <div
+      className={styles.wrapper}
+      ref={ref}
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+    >
       <div
         className={styles.header}
         onClick={() => setOptionsActive((prev) => !prev)}
-        tabIndex={0}
       >
         {header}
       </div>
