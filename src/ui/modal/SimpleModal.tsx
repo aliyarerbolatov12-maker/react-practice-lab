@@ -8,19 +8,21 @@ interface SimpleModalProps {
   opened: boolean;
   onClose: () => void;
   children: ReactNode;
+  titleId?: string;
 }
 
 export default function SimpleModal({
   opened,
   onClose,
   children,
+  titleId = "modal-title",
 }: SimpleModalProps) {
   const { mounted, ref } = useMount<HTMLDivElement>({ opened });
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     if (opened) {
-      setTimeout(() => setAnimate(true), 0);
+      setTimeout(() => setAnimate(true), 20);
     } else {
       setAnimate(false);
     }
@@ -31,9 +33,12 @@ export default function SimpleModal({
   return createPortal(
     <div
       ref={ref}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={titleId}
       className={clsx(styles.container, { [styles.opened]: animate })}
     >
-      <div className={styles.overlay} onClick={onClose}></div>
+      <div className={styles.overlay} onClick={onClose} />
       <div className={styles.content}>{children}</div>
     </div>,
     document.body

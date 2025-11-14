@@ -13,6 +13,7 @@ export default function ModalDemo() {
         onClose={() => {
           setIsOpen(false);
         }}
+        titleId="simple-modal-title"
       >
         <h2>Simple animation</h2>
       </SimpleModal>
