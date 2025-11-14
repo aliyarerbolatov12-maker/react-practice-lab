@@ -15,22 +15,10 @@ export default function ButtonDemo() {
   const [selectedVariant, setSelectedVariant] =
     useState<ButtonVariant>("default");
 
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-      <DropDown
-        optionsHeader={
-          BUTTON_VARIANTS.find((v) => v.value === selectedVariant)?.label ||
-          "Select"
-        }
-        options={BUTTON_VARIANTS.map((v) => ({ label: v.label }))}
-        onSelect={(label: string) => {
-          const found = BUTTON_VARIANTS.find((v) => v.label === label);
-          if (found) setSelectedVariant(found.value);
-        }}
-      />
-
-      <Button variant={selectedVariant}>
-        {selectedVariant === "icon" ? (
+  const renderButtonContent = () => {
+    switch (selectedVariant) {
+      case "icon":
+        return (
           <>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -49,12 +37,31 @@ export default function ButtonDemo() {
             </svg>
             Add Item
           </>
-        ) : selectedVariant === "loading" ? (
-          "Loading"
-        ) : (
+        );
+      case "loading":
+        return "Loading";
+      default:
+        return (
           selectedVariant.charAt(0).toUpperCase() + selectedVariant.slice(1)
-        )}
-      </Button>
+        );
+    }
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <DropDown
+        optionsHeader={
+          BUTTON_VARIANTS.find((v) => v.value === selectedVariant)?.label ||
+          "Select"
+        }
+        options={BUTTON_VARIANTS.map((v) => ({ label: v.label }))}
+        onSelect={(label: string) => {
+          const found = BUTTON_VARIANTS.find((v) => v.label === label);
+          if (found) setSelectedVariant(found.value);
+        }}
+      />
+
+      <Button variant={selectedVariant}>{renderButtonContent()}</Button>
     </div>
   );
 }
